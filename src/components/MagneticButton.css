@@ -1,0 +1,80 @@
+.magnetic-wrapper {
+  display: inline-flex;
+  padding: 1.5rem;
+  cursor: pointer;
+}
+
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  color: var(--button-text);
+  background: var(--button-bg);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              background var(--duration-fast) var(--ease-in-out),
+              color var(--duration-fast) var(--ease-in-out);
+  text-decoration: none;
+}
+
+.magnetic-btn__text {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.magnetic-btn__glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--button-bg-hover);
+  opacity: 0;
+  filter: blur(12px);
+  transition: opacity var(--duration-normal) var(--ease-in-out);
+  z-index: 0;
+}
+
+.magnetic-btn:hover .magnetic-btn__glow {
+  opacity: 0.25;
+}
+
+.magnetic-btn:hover {
+  background: var(--button-bg-hover);
+}
+
+/* Outline variant */
+.magnetic-btn--outline {
+  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+.magnetic-btn--outline:hover {
+  background: var(--surface);
+  color: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+}
+
+.magnetic-btn--outline .magnetic-btn__glow {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+@media (max-width: 768px) {
+  .magnetic-wrapper {
+    padding: 1rem;
+  }
+
+  .magnetic-btn {
+    padding: 0.875rem 2rem;
+    font-size: 0.8rem;
+  }
+}

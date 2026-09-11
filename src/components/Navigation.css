@@ -1,0 +1,123 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--z-nav);
+  padding: 1.5rem var(--gutter);
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              background var(--duration-normal) var(--ease-in-out),
+              padding var(--duration-normal) var(--ease-out-expo),
+              border-color var(--duration-normal) var(--ease-in-out);
+}
+
+.nav--scrolled {
+  padding: 1rem var(--gutter);
+  background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.nav--hidden {
+  transform: translateY(-100%);
+}
+
+.nav__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-primary);
+  transition: color var(--duration-fast) var(--ease-out-expo);
+}
+
+.nav__brand:hover {
+  color: var(--accent-hover);
+}
+
+.nav__logo {
+  width: 24px;
+  height: 24px;
+  color: var(--accent);
+  transition: color var(--duration-normal) var(--ease-in-out);
+}
+
+.nav__logo-text {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  position: relative;
+  top: 2px;
+}
+
+.nav__links {
+  display: flex;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+.nav__link {
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) var(--ease-out-expo);
+}
+
+.nav__link:hover {
+  color: var(--text-primary);
+}
+
+.nav__theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background: transparent;
+  transition: background var(--duration-fast) var(--ease-out-expo),
+              color var(--duration-fast) var(--ease-out-expo);
+}
+
+.nav__theme-toggle:hover {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.nav__divider {
+  width: 1px;
+  height: 16px;
+  background-color: var(--border);
+  margin: 0 -0.5rem;
+}
+
+.nav__cta {
+  color: var(--button-text);
+  background: var(--button-bg);
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  transition: background var(--duration-fast) var(--ease-out-expo), 
+              transform var(--duration-fast) var(--ease-out-expo),
+              color var(--duration-fast) var(--ease-out-expo);
+}
+
+.nav__cta:hover {
+  background: var(--button-bg-hover);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .nav__links {
+    display: none;
+  }
+}

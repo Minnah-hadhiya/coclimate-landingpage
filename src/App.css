@@ -1,0 +1,13 @@
+.app {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-out-expo);
+}
+
+.app--loaded {
+  opacity: 1;
+}
+
+.app__main {
+  position: relative;
+  z-index: 1;
+}

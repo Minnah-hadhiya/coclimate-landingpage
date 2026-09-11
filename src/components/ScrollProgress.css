@@ -1,0 +1,50 @@
+.scroll-progress {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 120px;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.scroll-progress__track {
+  width: 1px;
+  height: 100%;
+  background: var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--duration-normal) var(--ease-in-out);
+}
+
+.scroll-progress__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: background var(--duration-normal) var(--ease-in-out);
+}
+
+.scroll-progress__dot {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: top 0.1s linear, background var(--duration-normal) var(--ease-in-out);
+}
+
+@media (max-width: 768px) {
+  .scroll-progress {
+    right: 0.75rem;
+    height: 80px;
+  }
+}

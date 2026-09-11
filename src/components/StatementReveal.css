@@ -1,0 +1,29 @@
+.statement-reveal {
+  overflow: hidden;
+}
+
+.statement-reveal__word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(1.2em);
+  filter: blur(4px);
+  transition:
+    opacity 0.7s var(--ease-out-expo) calc(var(--delay, 0ms) + var(--i, 0) * 60ms),
+    transform 0.7s var(--ease-out-expo) calc(var(--delay, 0ms) + var(--i, 0) * 60ms),
+    filter 0.7s var(--ease-out-expo) calc(var(--delay, 0ms) + var(--i, 0) * 60ms);
+}
+
+.statement-reveal--visible .statement-reveal__word {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statement-reveal__word {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
