@@ -1,33 +1,44 @@
+/* ══════════════════════════════════════════════
+   Act Two — Observe Every Hectare
+   Editorial composition with aerial image card.
+   NO full-screen background image.
+   ══════════════════════════════════════════════ */
+
 .act-two {
   position: relative;
   width: 100%;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
+  padding: 8rem 0 10rem;
+  overflow: visible; /* Allow card to overlap into next section */
+  z-index: 5;
   transition: background var(--duration-normal) var(--ease-in-out);
 }
 
-.act-two__canvas {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: var(--z-canvas);
-}
-
-.act-two__content {
-  position: relative;
-  z-index: var(--z-content);
-  width: 100%;
-  padding: 8rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.act-two__hero-text {
-  text-align: center;
+.act-two__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
   padding: 0 var(--gutter);
-  max-width: 1100px;
-  pointer-events: auto;
+}
+
+/* ── Editorial Split ── */
+.act-two__split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.act-two__split--visible .act-two__text-col {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Text Column ── */
+.act-two__text-col {
+  padding-top: 2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
 }
 
 .act-two__label {
@@ -37,17 +48,147 @@
 }
 
 .act-two__headline {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .act-two__sub {
   color: var(--text-secondary);
-  max-width: 600px;
-  margin: 2rem auto 0;
-  text-align: center;
+  max-width: 480px;
+  margin: 1.5rem 0 0;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s var(--ease-out-expo) 0.3s, transform 0.8s var(--ease-out-expo) 0.3s;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.act-two__sub--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Editorial Info Block ── */
+.act-two__info-block {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s var(--ease-out-expo) 0.5s, transform 0.8s var(--ease-out-expo) 0.5s;
+}
+
+.act-two__split--visible .act-two__info-block {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.act-two__info-label {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.act-two__info-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.act-two__info-dot {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* ── Aerial Image Card ── */
+.act-two__card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s var(--ease-out-expo) 0.2s, transform 1s var(--ease-out-expo) 0.2s;
+  will-change: transform;
+  /* Allow this card to extend below the section boundary */
+  margin-bottom: -4rem;
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid var(--border);
+}
+
+.act-two__card--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.act-two__card-image-wrapper {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.act-two__card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.act-two__card:hover .act-two__card-image {
+  transform: scale(1.03);
+}
+
+/* Card metadata strip */
+.act-two__card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.act-two__card-coord {
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+.act-two__card-tag {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .act-two__text-col,
+  .act-two__card,
+  .act-two__sub {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .act-two {
+    padding: 5rem 0 8rem;
+  }
+
+  .act-two__split {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .act-two__card {
+    margin-bottom: -3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .act-two__card-image-wrapper {
+    aspect-ratio: 16 / 10;
+  }
 }

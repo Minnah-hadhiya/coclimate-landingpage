@@ -1,14 +1,75 @@
+/* ══════════════════════════════════════════════
+   Coda — Final emotional return to the land
+   ══════════════════════════════════════════════ */
+
 .coda {
   position: relative;
   min-height: 100vh;
-  background: var(--bg-tertiary);
   z-index: 20;
-  border-top: 1px solid var(--border);
-  transition: background var(--duration-normal) var(--ease-in-out),
-              border-color var(--duration-normal) var(--ease-in-out);
+  overflow: hidden;
+  /* Remove solid background — landscape takes over */
 }
 
+/* ── Landscape Background ── */
+.coda__landscape-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.coda__landscape {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 2s var(--ease-in-out);
+}
+
+.coda__landscape--loaded {
+  opacity: 1;
+  /* Extremely peaceful, slow drift to represent the quiet end */
+  animation: codaDrift 70s linear infinite alternate;
+}
+
+@keyframes codaDrift {
+  0% { transform: scale(1.02) translate3d(0, 0, 0); }
+  100% { transform: scale(1.05) translate3d(1%, -1%, 0); }
+}
+
+/* Very subtle bottom vignette — NOT a blanket overlay */
+.coda__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 18, 16, 0.3) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+[data-theme='light'] .coda__overlay {
+  background: linear-gradient(to top, rgba(245, 241, 232, 0.25) 0%, transparent 40%);
+}
+
+/* Tightly localised mask ONLY behind the text — NOT covering the whole image */
+.coda__hero-text-mask {
+  position: absolute;
+  width: 110%;
+  height: 120%;
+  top: -10%;
+  left: -5%;
+  background: radial-gradient(ellipse at left center, rgba(15, 18, 16, 0.5) 0%, rgba(15, 18, 16, 0.15) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+[data-theme='light'] .coda__hero-text-mask {
+  background: radial-gradient(ellipse at left center, rgba(245, 241, 232, 0.6) 0%, rgba(245, 241, 232, 0.2) 45%, transparent 70%);
+}
+
+/* ── Content ── */
 .coda__content {
+  position: relative;
+  z-index: 10;
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
@@ -20,13 +81,27 @@
 }
 
 .coda__main {
+  position: relative;
   max-width: 800px;
   margin-top: 4rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.4s var(--ease-out-expo), transform 1.4s var(--ease-out-expo);
+}
+
+.coda__main--visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .coda__headline {
   margin-bottom: 2rem;
   color: var(--text-primary);
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='light'] .coda__headline {
+  text-shadow: 0 2px 30px rgba(245, 241, 232, 0.4);
 }
 
 .coda__sub {
@@ -72,9 +147,13 @@
 }
 
 .coda__btn--outline:hover {
-  background: var(--surface);
-  border-color: var(--accent-secondary);
-  color: var(--accent-secondary);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+[data-theme='light'] .coda__btn--outline:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
 
 /* Footer */
@@ -84,7 +163,11 @@
   align-items: center;
   margin-top: 8rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] .coda__footer {
+  border-top-color: var(--border);
 }
 
 .coda__footer-left {
@@ -131,6 +214,16 @@
   color: var(--text-primary);
 }
 
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .coda__main {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .coda__footer {
     flex-direction: column;

@@ -5,8 +5,8 @@ import Navigation from '../components/Navigation';
 import ScrollProgress from '../components/ScrollProgress';
 import ActOne from '../sections/ActOne';
 import ActTwo from '../sections/ActTwo';
-import ProductShowcase from '../sections/ProductShowcase';
 import ActFour from '../sections/ActFour';
+import ProductShowcase from '../sections/ProductShowcase';
 import Services from '../sections/Services';
 import Contact from '../sections/Contact';
 import Coda from '../sections/Coda';
@@ -29,25 +29,25 @@ export default function LandingPage() {
         <ScrollProgress />
 
         <main className="app__main">
-          {/* 1. Hero — What is Co-Climate and why it exists */}
+          {/* 1. Hero — Full-screen cinematic landscape */}
           <ActOne isMobile={isMobile} />
 
-          {/* 2. In the Field — How evidence is captured */}
+          {/* 2. Observe — Editorial layout with aerial image card */}
           <ActTwo isMobile={isMobile} />
 
-          {/* 3. The Platform — What the interface looks like */}
-          <ProductShowcase />
-
-          {/* 4. How It Works — The 4-step verification process */}
+          {/* 3. Evidence — Verification steps with field image card */}
           <ActFour />
 
-          {/* 5. Services — What Co-Climate offers */}
+          {/* 4. Platform — Clean product UI */}
+          <ProductShowcase />
+
+          {/* 5. Services */}
           <Services />
 
-          {/* 6. Contact — Get started */}
+          {/* 6. Contact */}
           <Contact />
 
-          {/* 7. Coda — Final statement + closing */}
+          {/* 7. Coda — Return to the land */}
           <Coda />
         </main>
         

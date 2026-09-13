@@ -1,12 +1,57 @@
+import { useRef, useEffect, useState } from 'react';
 import StatementReveal from '../components/StatementReveal';
-import MagneticButton from '../components/MagneticButton';
 import './Coda.css';
 
+/**
+ * Coda — Final emotional return to the land
+ * 
+ * After technology, data, and platform:
+ * the visual language becomes simpler again.
+ * 
+ * "Proof the trees are still standing."
+ * 
+ * This is the quietest and strongest moment of the website.
+ */
 export default function Coda() {
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="coda" id="coda">
+    <section ref={sectionRef} className="coda" id="coda">
+      {/* Environmental landscape background — return to the land */}
+      <div className="coda__landscape-container">
+        <img
+          src="/images/cinematic/landscape_return.jpg"
+          alt=""
+          className={`coda__landscape ${imageLoaded ? 'coda__landscape--loaded' : ''}`}
+          onLoad={() => setImageLoaded(true)}
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="coda__overlay" />
+      </div>
+
       <div className="coda__content">
-        <div className="coda__main">
+        <div className={`coda__main ${isVisible ? 'coda__main--visible' : ''}`}>
+          <div className="coda__hero-text-mask" />
           <StatementReveal
             text="Proof the trees are still standing."
             className="t-display coda__headline"

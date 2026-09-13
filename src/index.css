@@ -78,10 +78,10 @@
   --text-muted: #8D968B;
   --text-inverse: #151B17;
   
-  --accent: #76938D;
-  --accent-hover: #8ba8a2;
-  --accent-soft: #91A894;
-  --accent-mineral: #76938D;
+  --accent: #22c55e; /* Green-500 */
+  --accent-hover: #4ade80; /* Green-400 */
+  --accent-soft: #86efac; /* Green-300 */
+  --accent-mineral: #10b981; /* Emerald */
   
   --button-bg: #34734E;
   --button-bg-hover: #42845D;
@@ -112,10 +112,10 @@
   --text-muted: #747B72;
   --text-inverse: #FFFFFF;
   
-  --accent: #6F918A;
-  --accent-hover: #7b9c95;
-  --accent-soft: #B8C8B5;
-  --accent-mineral: #AABBB2;
+  --accent: #16a34a; /* Green-600 */
+  --accent-hover: #15803d; /* Green-700 */
+  --accent-soft: #4ade80; /* Green-400 */
+  --accent-mineral: #059669; /* Emerald-600 */
   
   --button-bg: #24553A;
   --button-bg-hover: #316A49;
@@ -331,6 +331,28 @@ ul, ol {
   color: var(--accent);
 }
 
+/* --- Cinematic utilities --- */
+:root {
+  --cinematic-duration: 30s;
+}
+
+.cinematic-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 1.6s var(--ease-in-out);
+}
+
+/* App visibility gate — prevent content flash before preloader */
+.app {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-in-out);
+}
+
+.app--loaded {
+  opacity: 1;
+}
+
 /* --- Reduced motion --- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -339,6 +361,10 @@ ul, ol {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .cinematic-image {
+    transition: none !important;
   }
 }
 

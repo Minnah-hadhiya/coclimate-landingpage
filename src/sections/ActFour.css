@@ -1,5 +1,7 @@
 /* ══════════════════════════════════════════════
-   Act Four — Interactive Sequence
+   Act Four — How It Works (Evidence)
+   Verification steps + field image card.
+   Solid background — NOT transparent over a shared layer.
    ══════════════════════════════════════════════ */
 
 .act-four {
@@ -8,6 +10,7 @@
   background: var(--bg-secondary);
   padding: 8rem 0;
   overflow: hidden;
+  z-index: 5;
   border-top: 1px solid var(--border);
   transition: background var(--duration-normal) var(--ease-in-out),
               border-color var(--duration-normal) var(--ease-in-out);
@@ -28,9 +31,17 @@
   transform: translateY(0);
 }
 
+/* ── Header Split: Text + Field Image Card ── */
+.act-four__header-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  margin-bottom: 5rem;
+}
+
 .act-four__header {
   max-width: 580px;
-  margin-bottom: 5rem;
 }
 
 .act-four__label {
@@ -42,6 +53,59 @@
 .act-four__subtext {
   margin-top: 1.5rem;
   color: var(--text-secondary);
+}
+
+/* ── Field Image Card ── */
+.act-four__field-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--ease-out-expo) 0.3s, transform 1s var(--ease-out-expo) 0.3s;
+}
+
+.act-four__field-card--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.act-four__field-image-wrapper {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.act-four__field-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.act-four__field-card:hover .act-four__field-image {
+  transform: scale(1.03);
+}
+
+.act-four__field-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 1rem;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.act-four__field-tag {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+.act-four__field-date {
+  font-size: 0.65rem;
+  color: var(--accent);
 }
 
 /* ── Sequence ── */
@@ -86,7 +150,12 @@
 }
 
 .act-four__step--revealed .act-four__step-num {
+  color: var(--text-primary);
+}
+
+.act-four__step--hovered .act-four__step-num {
   color: var(--accent);
+  transform: scale(1.1);
 }
 
 .act-four__step-line-wrapper {
@@ -107,14 +176,19 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: var(--accent);
+  background: var(--border-strong);
   transform-origin: left;
   transform: scaleX(0);
-  transition: transform 0.6s var(--ease-in-out);
+  transition: transform 0.6s var(--ease-in-out), background var(--duration-normal);
 }
 
 .act-four__step--revealed .act-four__step-line {
   transform: scaleX(1);
+}
+
+.act-four__step--hovered .act-four__step-line {
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-soft);
 }
 
 /* Body (Title + Description) */
@@ -124,11 +198,17 @@
   font-size: 1.1rem;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
-  transition: color var(--duration-normal);
+  transition: color var(--duration-normal), transform var(--duration-normal) var(--ease-out-expo);
+  transform-origin: left;
 }
 
 .act-four__step--revealed .act-four__step-title {
   color: var(--text-primary);
+}
+
+.act-four__step--hovered .act-four__step-title {
+  color: var(--accent);
+  transform: scale(1.05);
 }
 
 .act-four__step-desc-wrapper {
@@ -152,10 +232,19 @@
   transform: translateY(0);
 }
 
+.act-four__step--hovered .act-four__step-desc {
+  color: var(--text-primary);
+}
+
 /* ══════════════════════════════════════════════
    Responsive
    ══════════════════════════════════════════════ */
 @media (max-width: 1024px) {
+  .act-four__header-split {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
   .act-four__sequence {
     gap: 1.5rem;
   }
@@ -164,6 +253,10 @@
 @media (max-width: 768px) {
   .act-four {
     padding: 5rem 0;
+  }
+
+  .act-four__field-card {
+    max-width: 100%;
   }
 
   .act-four__sequence {
@@ -203,7 +296,6 @@
 
   .act-four__step--revealed .act-four__step-line {
     transform: scaleY(1);
-    transform: scaleX(1); /* Ensure X is not 0 */
   }
 
   .act-four__step:last-child .act-four__step-line-wrapper {
